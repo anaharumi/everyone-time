@@ -1,31 +1,22 @@
-import React, { useState } from "react";
+
 import style from './List.module.scss'
 import Item from './Item'
+import { IKids } from '../../types/kids';
 
+interface Props {
+    kids: IKids[],
+    selecionaKids: (kidsSelecionada: IKids) => void
+}
 
-
-function List () {
-    const [kids, setKids] = useState([{
-        nome: 'Amy',
-        tempo: '01:00:00'
-    },
-    {
-        nome: 'Johnny',
-        tempo: '01:00:00'
-    },
-    {
-        nome: 'Pausa',
-        tempo: '00:30:00'
-    }]);
+function List ({kids, selecionaKids}: Props ) {
     return(
         <aside className={style.listaRodadas}>
-            <h2 onClick={()=>{
-                setKids ([...kids, {nome: "Harumi", tempo: "01:00:00"}]);
-            }}>Rodadas do dia</h2>
+            <h2>Rodadas do dia</h2>
             <ul>
-                {kids.map((item, index)=>(
+                {kids.map(item=>(
                     <Item 
-                        key={index}
+                        selecionaKids = {selecionaKids}
+                        key={item.id}
                     //modo1
                     //nome={item.nome}  
                     //tempo={item.tempo}
